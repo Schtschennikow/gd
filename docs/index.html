@@ -1,31 +1,27 @@
 <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <style> body { margin: 0; } </style>
+
+  <script src="http://unpkg.com/3d-force-graph"></script>
 
 </head>
-<body bgcolor="#212226">
-    <div id="headers">
-        <h1 id="header1">Инициативные кластеры VI созыва Госдумы</h1>
-        <h2 id="header2">Граф соинициаторов* законопроектов, внесенных на рассмотрение в VI созыве Государственной Думы</h2>
-    </div>
-    <div id="info" class=text0>
-        <p>
-            <span style="color: rgb(0,172,229);">⬤</span>
-            <span class=textWhite> — впервые в Госдуме</span>
-        </p>
-        <p>
-            <span style="color: rgb(191,56,29);">⬤</span>
-            <span class=textWhite> — два и более созывов</span>
-        </p>
-    </div>
-    <iframe src="./3dVI.html" style="border: 0; width: 100%; height: 100%">
-    </iframe>
-    <div id="source" class=text0>
-        <span class=textWhite>Источник: Портал открытых данных Государственной Думы</span>
-    </div>
-    <div id="star" class=text0>
-        <span class=textWhite>*пары у которых больше четырёх совместных инициатив</span>
-        <img id="logo" src="./pics/logo.svg">
-    </div>
+
+<body>
+  <div id="graph" class=graphBlock></div>
+  
+  <script>
+
+      const Graph = ForceGraph3D()
+        (document.getElementById('graph'))
+          .jsonUrl('./data/dataVIOnlyOver4.json')
+          .backgroundColor("#212226")
+          .nodeColor(node => node.group == 2 ? "rgba(191,56,29,1)" : "rgba(0,172,229,1)")
+          .nodeOpacity(1)
+          .linkOpacity(0.025)
+          .enableNodeDrag(false)
+          // .zoomToFit(0, 10, node => true)
+          .cameraPosition({"z":810})
+          .showNavInfo(false);
+
+  </script>
+
 </body>
